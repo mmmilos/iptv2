@@ -128,7 +128,7 @@ const Src = {
     const key = `${p.id}|${t}|cats`;
     if (!await DB.getMeta(key)) {
       if (p.type === 'm3u') {
-        jobs[p.id] = jobs[p.id] || loadM3U(p).finally(() => { delete jobs[p.id]; });
+        jobs[p.id] = jobs[p.id] || loadM3U(p).then(() => { delete jobs[p.id]; }, e => { delete jobs[p.id]; throw e; });
         await jobs[p.id];
       } else {
         const j = await getJSON(apiUrl(p, { live: 'get_live_categories', vod: 'get_vod_categories', series: 'get_series_categories' }[t]));

@@ -86,8 +86,19 @@
 </div>
 
 <div id="status"></div>
+<div id="boot"></div>
 
-<script src="$WEBAPIS/webapis/webapis.js" onerror="void 0"></script>
+<script>
+// Fehler sichtbar machen statt schwarzem Bildschirm
+function bootErr(m) { var b = document.getElementById('boot'); if (b) { b.style.display = 'block'; b.textContent = 'Fehler: ' + m; } }
+window.onerror = function (m, s, l) { bootErr(m + ' (' + String(s || '').split('/').pop() + ':' + l + ')'); };
+window.addEventListener('unhandledrejection', function (e) { bootErr(String(e.reason && e.reason.message || e.reason)); });
+// Samsung-WebAPIs nur nachladen (blockiert den Start nicht), falls vorhanden
+if (typeof webapis === 'undefined') {
+  var w = document.createElement('script'); w.src = '$WEBAPIS/webapis/webapis.js'; w.async = true; w.onerror = function () {};
+  document.head.appendChild(w);
+}
+</script>
 <script src="config.js"></script>
 <script src="data.js"></script>
 <script src="ui.js"></script>

@@ -146,3 +146,5 @@ body[data-eng=html] #av { display:none; }
 .mi.on:before { content:'✓  '; }
 .mi.rf { background:#fff; color:#000; }
 .mn { color:var(--mut); font-size:20px; line-height:28px; padding:6px 4px; }
+
+#boot { display:none; position:fixed; top:0; left:0; right:0; z-index:99; padding:12px 24px; background:#5a1010; color:#fff; font-size:20px; line-height:26px; }
